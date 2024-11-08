@@ -49,13 +49,22 @@ export default function App() {
   };
 
   const currentQuestion = questions[currentQuestionIndex];
+  const pastelColors = ['#A3C9F1', '#A1D8D5', '#F9D1D1', '#E7C6FF', '#FFDF91'];
 
   return (
       <View style={styles.container}>
         {score === null ? (
             <>
-              <Image source={currentQuestion.image} style={styles.image} />
-              <Text style={styles.question}>{currentQuestion.question}</Text>
+              <View style={[
+                styles.questionContainer,
+                {
+                  backgroundColor: pastelColors[currentQuestionIndex % pastelColors.length],
+                  borderColor: pastelColors[currentQuestionIndex % pastelColors.length]
+                }
+              ]}>
+                <Image source={currentQuestion.image} style={styles.image} />
+                <Text style={styles.question}>{currentQuestion.question}</Text>
+              </View>
               <Picker
                   selectedValue={selectedAnswers[currentQuestionIndex]}
                   onValueChange={handleAnswerChange}
@@ -65,12 +74,20 @@ export default function App() {
                     <Picker.Item key={index} label={option} value={option} />
                 ))}
               </Picker>
-              <Button title={currentQuestionIndex < questions.length - 1 ? "Next" : "Submit"} onPress={handleNextQuestion} />
+              <View style={styles.buttonContainer}>
+                <Button
+                    title={currentQuestionIndex < questions.length - 1 ? "Next" : "Submit"}
+                    onPress={handleNextQuestion}
+                    color="#4CAF50"
+                />
+              </View>
             </>
         ) : (
             <>
               <Text style={styles.scoreText}>You scored {score} out of {questions.length}</Text>
-              <Button title="Redo Quiz" onPress={resetQuiz} />
+              <View style={styles.buttonContainer}>
+                <Button title="Redo Quiz" onPress={resetQuiz} color="#FF5722" />
+              </View>
             </>
         )}
         <StatusBar style="auto" />
@@ -81,27 +98,56 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#fbf9e6',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 16,
+    padding: 20,
+  },
+  questionContainer: {
+    alignItems: 'center',
+    borderRadius: 8,
+    padding: 20,
+    marginBottom: 20,
+    elevation: 3,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
+    width: '100%',
+    borderWidth: 3,
   },
   image: {
-    width: 200,
-    height: 200,
+    width: 150,
+    height: 150,
     marginBottom: 20,
+    borderRadius: 8,
+    resizeMode: 'cover',
   },
   question: {
-    fontSize: 18,
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#333',
+    textAlign: 'center',
     marginBottom: 10,
   },
   picker: {
-    width: 200,
+    width: '100%',
+    backgroundColor: '#e0f7fa',
+    borderRadius: 5,
     marginBottom: 20,
+    paddingVertical: 5,
+    elevation: 2,
+  },
+  buttonContainer: {
+    marginTop: 10,
+    width: '80%',
   },
   scoreText: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginTop: 20,
+    color: '#4CAF50',
+    marginVertical: 20,
+    textAlign: 'center',
   },
 });
+
