@@ -9,7 +9,7 @@ export default function App() {
     { id: 2, image: require('./img/leopard.jpg'), question: "What is this animal?", options: ["Jaguar", "Leopard", "Cat"], answer: "Leopard" },
     { id: 3, image: require('./img/tiger.jpg'), question: "What is this animal?", options: ["Lion", "Tiger", "Panther"], answer: "Tiger" },
     { id: 4, image: require('./img/turtle.jpg'), question: "What is this animal?", options: ["Jellyfish", "Crab", "Turtle"], answer: "Turtle" },
-    { id: 5, image: require('./img/deer.jpg'), question: "What is this animal?", options: ["Moose", "Seer", "Horse"], answer: "Deer" },
+    { id: 5, image: require('./img/deer.jpg'), question: "What is this animal?", options: ["Moose", "Deer", "Horse"], answer: "Deer" },
   ];
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
